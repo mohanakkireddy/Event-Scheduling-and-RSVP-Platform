@@ -1,0 +1,43 @@
+<div class="container">
+    <form [formGroup]="createForm" (ngSubmit)="create()">
+        <div class="form-group mb-3 mt-3">
+            <label>Event Name:</label>
+            <input [class.is-invalid]="eventName.invalid && (eventName.touched || eventName.dirty)" class="form-control" type="text" formControlName="eventName">
+            <div *ngIf="eventName.invalid && eventName.touched">
+                <small class="text-danger" *ngIf="eventName.hasError('required')">Event Name is Required</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label>Event Date:</label>
+            <input [class.is-invalid]="eventDate.invalid && (eventDate.touched || eventDate.dirty)" class="form-control" type="date" formControlName="eventDate">
+            <div *ngIf="eventDate.invalid && eventDate.touched">
+                <small class="text-danger" *ngIf="eventDate.hasError('required')">Event Date is Required</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label>Event Time:</label>
+            <input [class.is-invalid]="eventTime.invalid && (eventTime.touched || eventTime.dirty)" class="form-control" type="time" formControlName="eventTime">
+            <div *ngIf="eventTime.invalid && eventTime.touched">
+                <small class="text-danger" *ngIf="eventTime.hasError('required')">Event Time is Required</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label>Host:</label>
+            <input [class.is-invalid]="hostName.invalid && (hostName.touched || hostName.dirty)" class="form-control" type="text" formControlName="hostName">
+            <div *ngIf="hostName.invalid && hostName.touched">
+                <small class="text-danger" *ngIf="hostName.hasError('required')">Host Name is Required</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label>Location:</label>
+            <input [class.is-invalid]="location.invalid && (location.touched || location.dirty)" class="form-control" type="text" formControlName="location">
+            <div *ngIf="location.invalid && location.touched">
+                <small class="text-danger" *ngIf="location.hasError('required')">Event Location is Required</small>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Create Event</button>
+    </form>
+
+    <button class="btn btn-dark">View all events</button>
+
+</div>
