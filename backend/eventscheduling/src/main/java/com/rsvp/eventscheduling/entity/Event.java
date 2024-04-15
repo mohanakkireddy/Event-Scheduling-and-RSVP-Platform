@@ -1,93 +1,37 @@
 package com.rsvp.eventscheduling.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Events")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
     @Id
     @GeneratedValue
     private int eventId;
+    @NonNull
     private String eventName;
+    @NonNull
     private Date eventDate;
+    @NonNull
     private String eventTime;
+    @NonNull
     private String hostName;
+    @NonNull
     private String location;
 
-    public Event() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id_fk")
+    private HostAddress hostAddress;
 
-    public Event(int eventId, String eventName, Date eventDate, String eventTime, String hostName, String location) {
-        this.eventId = eventId;
-        this.eventName = eventName;
-        this.eventDate = eventDate;
-        this.eventTime = eventTime;
-        this.hostName = hostName;
-        this.location = location;
-    }
 
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public String getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(String eventTime) {
-        this.eventTime = eventTime;
-    }
-
-    public String getHostName() {
-        return hostName;
-    }
-
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "eventId=" + eventId +
-                ", eventName='" + eventName + '\'' +
-                ", eventDate=" + eventDate +
-                ", eventTime='" + eventTime + '\'' +
-                ", hostName='" + hostName + '\'' +
-                ", location='" + location + '\'' +
-                '}';
-    }
 }

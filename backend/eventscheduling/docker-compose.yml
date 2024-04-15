@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+
+  eventscheduling:
+    build: ./
+    ports:
+      - "8080:8080"
+    environment:
+      - EVENT_DB_URL=jdbc:postgresql://postgres:5432/Event-Scheduling-and-RSVP-Platform
+      - EVENT_DB_USERNAME=postgres
+      - EVENT_DB_PASSWORD=Sakkireddy@1
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: Event-Scheduling-and-RSVP-Platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Sakkireddy@1
+

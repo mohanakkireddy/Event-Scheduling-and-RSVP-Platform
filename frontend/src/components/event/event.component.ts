@@ -3,11 +3,12 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { NgIf } from '@angular/common';
 import { EventDto } from './eventDTO';
 import { EventServiceService } from '../../services/event-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { EventListComponent } from '../event-list/event-list.component';
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule, NgIf],
+  imports: [ReactiveFormsModule,FormsModule, NgIf,EventListComponent,RouterOutlet],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css'
 })
@@ -42,7 +43,7 @@ export class EventComponent implements OnInit{
     });
     
   }
-  create(){
+    create(){
     if (this.createForm.valid) {
       const eventDto: EventDto = {
         eventName: this.createForm.get('eventName')?.value,
@@ -55,7 +56,8 @@ export class EventComponent implements OnInit{
         .subscribe(
           (response) => {
             console.log('Event successfully created:', response);
-            this.router.navigate(['/eventlist']);
+            this.router.navigate(['/home/eventlist']);
+            this.createForm.reset();
           },
           (error) => {
             console.error('Error creating event:', error);

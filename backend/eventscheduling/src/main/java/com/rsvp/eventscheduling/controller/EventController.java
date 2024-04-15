@@ -1,6 +1,7 @@
 package com.rsvp.eventscheduling.controller;
 
 import com.rsvp.eventscheduling.dto.CreateEventDTO;
+import com.rsvp.eventscheduling.dto.EventDTO;
 import com.rsvp.eventscheduling.entity.Event;
 import com.rsvp.eventscheduling.response.CreateEventResponse;
 import com.rsvp.eventscheduling.service.EventService;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/event")
 public class EventController {
 
@@ -23,10 +23,15 @@ public class EventController {
          CreateEventResponse createEventResponse = eventService.addEvent(createEventDTO);
         return ResponseEntity.status(createEventResponse.getStatus()).body(createEventResponse);
     }
+
     @GetMapping(path = "/view")
-    public List<Event> fetchUsers(){
+    public List<String> fetchEvents(){
         return eventService.fetchEvents();
     }
 
+    @GetMapping("/eventDetails/{eventId}")
+    public Event  fetchEventDetails(@PathVariable int eventId){
+        return eventService.fetchEventDetails(eventId);
+    }
 
 }

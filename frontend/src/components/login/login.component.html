@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="login">
+    <ng-container *ngIf="!signupFormVisible && !forgotPasswordFormVisible">
+      <div class="row">
+        <div class="col-md-11">
+          <h1>Login</h1>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeDialog()"></button>
+        </div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" >
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input [class.is-invalid]="email.invalid && (email.touched || email.dirty)" id="email" formControlName="email" type="email" class="form-control">
+          <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+            <div *ngIf="email.hasError('required')">Email is required.</div>
+            <div *ngIf="email.hasError('email')">Invalid email address.</div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="password">Password</label>
+          <input [class.is-invalid]="password.invalid && (password.touched || password.dirty)" id="password" formControlName="password" type="password" class="form-control">
+          <div *ngIf="password.invalid && password.touched" class="invalid-feedback">
+            <div *ngIf="password.hasError('required')">Password is required.</div>
+          </div>
+        </div>
+        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign In</button>
+      </form>
+      <div class="text-center">
+        <button (click)="openSignupForm()" class="mx-3">Signup</button>
+        <button (click)="openForgotPasswordForm()">Forgot Password</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="signupFormVisible">
+      <div class="row">
+        <div class="col-md-11">
+          <h1>Sign Up</h1>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeDialog()"></button>
+        </div>
+      </div>
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+        <div class="form-group mb-2">
+          <label>Name</label>
+          <input [class.is-invalid]="name.invalid && (name.touched || name.dirty)" class="form-control" formControlName="name">
+          <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+            <div *ngIf="name.hasError('required')">Name is required.</div>
+          </div>
+        </div>
+        <div class="form-group mb-2">
+          <label>Email</label>
+          <input [class.is-invalid]="signUpEmail.invalid && (signUpEmail.touched || signUpEmail.dirty)" class="form-control" formControlName="signUpEmail">
+          <div *ngIf="signUpEmail.invalid && signUpEmail.touched" class="invalid-feedback">
+            <div *ngIf="signUpEmail.hasError('required')">Email is required.</div>
+            <div *ngIf="signUpEmail.hasError('email')">Invalid email address.</div>
+          </div>
+        </div>
+        <div class="form-group mb-2">
+          <label>Password</label>
+          <input [class.is-invalid]="signUpPassword.invalid && (signUpPassword.touched || signUpPassword.dirty)"  class="form-control" formControlName="signUpPassword">
+          <div *ngIf="signUpPassword.invalid && signUpPassword.touched" class="invalid-feedback">
+            <div *ngIf="signUpPassword.hasError('required')">Password is required.</div>
+          </div>
+        </div>
+        <div class="form-group mb-2">
+          <label> Confirm Password</label>
+          <input [class.is-invalid]="confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)"  class="form-control" formControlName="confirmPassword">
+          <div *ngIf="confirmPassword.touched" >
+            <div *ngIf="confirmPassword.hasError('required')" class="invalid-feedback">Confirm Password is required.</div>
+            <div *ngIf="signUpForm.hasError('misMatch')" class="feedback"> Passwords should match</div>
+          </div>  
+        </div>
+        <button class="btn btn-primary" type="submit">Sign UP</button>
+      </form>
+      <button (click)="signupFormVisible = false" class="mt-3">Back to Login</button>
+    </ng-container>
+
+    <ng-container *ngIf="forgotPasswordFormVisible">
+      <!-- Your forgot password form code -->
+      <button (click)="forgotPasswordFormVisible = false">Back to Login</button>
+    </ng-container>
+  </div>
+</div>
