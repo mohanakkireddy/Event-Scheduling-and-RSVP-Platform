@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: event-scheduling-route
+          uri: lb://Event-Scheduling
+          predicates:
+            - Path=/Event-Scheduling/**
+          filters:
+            - StripPrefix=1
